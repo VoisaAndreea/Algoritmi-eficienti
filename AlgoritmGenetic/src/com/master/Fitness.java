@@ -1,0 +1,33 @@
+package com.master;
+
+public class Fitness {
+
+    static byte[] solution = new byte[50];
+
+    static void setSolution(String newSolution) {
+        solution = new byte[newSolution.length()];
+        for (int i = 0; i < newSolution.length(); i++) {
+            String character = newSolution.substring(i, i + 1);
+            if (character.contains("0") || character.contains("1")) {
+                solution[i] = Byte.parseByte(character);
+            } else {
+                solution[i] = 0;
+            }
+        }
+    }
+
+    static int getFitness(Individ individual) {
+        int fitness = 0;
+        for (int i = 0; i < individual.size() && i < solution.length; i++) {
+            if (individual.getGene(i) == solution[i]) {
+                fitness++;
+            }
+        }
+        return fitness;
+    }
+
+    // Se obtine optimul functiei
+    static int getMaxFitness() {
+        return solution.length;
+    }
+}
